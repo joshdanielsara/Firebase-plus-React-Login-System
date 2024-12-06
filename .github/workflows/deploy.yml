@@ -27,6 +27,10 @@ jobs:
           npm run build
         working-directory: ./app-react # Specify the working directory for build
 
+      # Install Firebase CLI
+      - name: Install Firebase CLI
+        run: npm install -g firebase-tools
+
       # Deploy to Firebase
       - name: Deploy to Firebase Hosting
         run: |
