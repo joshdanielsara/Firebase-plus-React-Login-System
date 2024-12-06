@@ -4,39 +4,34 @@ name: Build and Deploy React App
 on:
   push:
     branches:
-      - main  # Adjust this if your default branch is not `main`
+      - main  # Adjust this to match your primary branch
 
-# Define the jobs that will run on the workflow
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-    # Step 1: Checkout the code from the repository
+    # Step 1: Checkout the repository
     - name: Checkout code
       uses: actions/checkout@v2
 
-    # Step 2: Set up Node.js (use the version you need, e.g., 16.x)
+    # Step 2: Set up Node.js
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '16.x'  # Update to your desired version
+        node-version: '16.x'
 
     # Step 3: Install dependencies
     - name: Install dependencies
       run: npm install
 
-    # Step 4: Run the deploy script
-    - name: Run build
+    # Step 4: Build the project
+    - name: Build the project
       run: npm run build
 
-    # Step 4: Run the deploy script
-    - name: Run deploy script
-      run: npm run deploy
-
-    # Step 5: Deploy to GitHub Pages (optional, in case your deploy command doesn't cover it)
+    # Step 5: Deploy to GitHub Pages
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.MY_SECRET }}
-        publish_dir: ./docs
+        publish_dir: ./build
