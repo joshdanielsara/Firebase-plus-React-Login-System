@@ -1,35 +1,35 @@
-name: Firebase Hosting CI/CD
+name: Deploy to Firebase Hosting
 
 on:
   push:
     branches:
-      - main  # Replace with the branch you want to deploy from
+      - main # Adjust to your default branch if necessary
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
       # Step 1: Checkout the repository
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v3
 
       # Step 2: Set up Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 'v22.12.0' # Ensure it matches your project's Node.js version
+          node-version: '16' # Ensure it matches your project's Node.js version
 
       # Step 3: Install dependencies
       - name: Install dependencies
         run: npm install
 
       # Step 4: Build the React app
-      - name: Build the React app
+      - name: Build the app
         run: npm run build
 
       # Step 5: Deploy to Firebase Hosting
-      - name: Deploy to Firebase
+      - name: Deploy to Firebase Hosting
         uses: w9jds/firebase-action@v2
         with:
           args: deploy --only hosting
