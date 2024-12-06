@@ -25,13 +25,12 @@ jobs:
         run: |
           npm install
           npm run build
-        working-directory: ./app-react # Replace with the actual directory name
+        working-directory: ./app-react # Specify the working directory for build
 
       # Deploy to Firebase
       - name: Deploy to Firebase Hosting
-        uses: docker://w9jds/firebase-action:master
-        with:
-          args: deploy
+        run: |
+          cd ./app-react # Change to the correct directory
+          firebase deploy --token ${{ secrets.FIREBASE_TOKEN }} # Use Firebase CLI directly
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-        working-directory: ./app-react # Ensure this is where your Firebase app directory is located
