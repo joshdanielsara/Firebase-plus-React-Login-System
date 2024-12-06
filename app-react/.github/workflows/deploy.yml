@@ -6,6 +6,7 @@ on:
     branches:
       - main  # Adjust this if your default branch is not `main`
 
+# Define the jobs that will run on the workflow
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -19,21 +20,23 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '16.x'  # Adjust to your desired Node.js version
+        node-version: '16.x'  # Update to your desired version
 
     # Step 3: Install dependencies
     - name: Install dependencies
       run: npm install
 
-
-    # Step 4: build page first
-    - name: Run build 
+    # Step 4: Run the deploy script
+    - name: Run build
       run: npm run build
 
-    # Step 4: Run deploy script (this will build and deploy to GitHub Pages)
+    # Step 4: Run the deploy script
     - name: Run deploy script
       run: npm run deploy
 
-    # Step 5: Optional step to clean up
-    - name: Clean up deploy
-      run: git reset --hard
+    # Step 5: Deploy to GitHub Pages (optional, in case your deploy command doesn't cover it)
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.MY_SECRET }}
+        publish_dir: ./build
