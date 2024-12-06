@@ -25,6 +25,11 @@ jobs:
     - name: Install dependencies
       run: npm install
 
+
+    # Step 4: build page first
+    - name: Run build 
+      run: npm run build
+
     # Step 4: Run deploy script (this will build and deploy to GitHub Pages)
     - name: Run deploy script
       run: npm run deploy
