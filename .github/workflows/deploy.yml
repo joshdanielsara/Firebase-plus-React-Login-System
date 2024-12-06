@@ -28,7 +28,7 @@ jobs:
 
       # Deploy to Firebase
       - name: Deploy to Firebase Hosting
-        uses: w9jds/firebase-action@v4.2.0
+        uses: docker://w9jds/firebase-action:master
         with:
           args: deploy
         env:
