@@ -1,36 +1,37 @@
-name: Deploy React App to GitHub Pages
+name: Firebase Hosting CI/CD
 
 on:
   push:
     branches:
-      - main  # Trigger workflow on pushes to the main branch
+      - main  # Replace with the branch you want to deploy from
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-    # Step 1: Checkout the repository
-    - name: Checkout code
-      uses: actions/checkout@v3
+      # Step 1: Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    # Step 2: Set up Node.js
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: 'v22.12.0'  # Use the same Node.js version as your project
+      # Step 2: Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 'v22.12.0' # Ensure it matches your project's Node.js version
 
-    # Step 3: Install dependencies
-    - name: Install dependencies
-      run: npm install
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: npm install
 
-    # Step 4: Build the project
-    - name: Build the project
-      run: npm run build
+      # Step 4: Build the React app
+      - name: Build the React app
+        run: npm run build
 
-    # Step 5: Deploy to GitHub Pages
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./build
+      # Step 5: Deploy to Firebase Hosting
+      - name: Deploy to Firebase
+        uses: w9jds/firebase-action@v2
+        with:
+          args: deploy --only hosting
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
