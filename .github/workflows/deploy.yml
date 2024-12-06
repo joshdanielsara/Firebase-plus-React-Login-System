@@ -25,7 +25,7 @@ jobs:
         run: |
           npm install
           npm run build
-        working-directory: ./react-app # Replace with the actual directory name
+        working-directory: ./app-react # Replace with the actual directory name
 
       # Deploy to Firebase
       - name: Deploy to Firebase Hosting
