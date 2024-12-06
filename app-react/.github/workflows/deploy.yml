@@ -1,37 +1,36 @@
-name: Build and Deploy React App
+name: Deploy React App to GitHub Pages
 
 on:
   push:
     branches:
-      - main  # Change to the branch you use for development if not `main`
+      - main  # Trigger workflow on pushes to the main branch
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout the repository code
-      - name: Checkout code
-        uses: actions/checkout@v3
+    # Step 1: Checkout the repository
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-      # Step 2: Set up Node.js environment
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16.x'
+    # Step 2: Set up Node.js
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 'v22.12.0'  # Use the same Node.js version as your project
 
-      # Step 3: Install dependencies
-      - name: Install dependencies
-        run: npm install
+    # Step 3: Install dependencies
+    - name: Install dependencies
+      run: npm install
 
-      # Step 4: Build the project
-      - name: Build the React app
-        run: npm run build
+    # Step 4: Build the project
+    - name: Build the project
+      run: npm run build
 
-      # Step 5: Deploy to GitHub Pages
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.MY_SECRET }} # GitHub automatically provides this token
-          publish_branch: gh-pages # This is the default branch GitHub Pages uses; change if needed
-          publish_dir: ./docs # Directory containing the production build
+    # Step 5: Deploy to GitHub Pages
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./build
