@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/Firebase-plus-React-Login-System/static/css/main.905f7b97.css",
-    "main.js": "/Firebase-plus-React-Login-System/static/js/main.d04bdbe8.js",
+    "main.js": "/Firebase-plus-React-Login-System/static/js/main.23bba2ff.js",
     "static/js/453.44f2521d.chunk.js": "/Firebase-plus-React-Login-System/static/js/453.44f2521d.chunk.js",
     "index.html": "/Firebase-plus-React-Login-System/index.html",
     "main.905f7b97.css.map": "/Firebase-plus-React-Login-System/static/css/main.905f7b97.css.map",
-    "main.d04bdbe8.js.map": "/Firebase-plus-React-Login-System/static/js/main.d04bdbe8.js.map",
+    "main.23bba2ff.js.map": "/Firebase-plus-React-Login-System/static/js/main.23bba2ff.js.map",
     "453.44f2521d.chunk.js.map": "/Firebase-plus-React-Login-System/static/js/453.44f2521d.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.905f7b97.css",
-    "static/js/main.d04bdbe8.js"
+    "static/js/main.23bba2ff.js"
   ]
 }
