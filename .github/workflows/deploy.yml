@@ -20,12 +20,18 @@ jobs:
         with:
           node-version: 18
 
+      # Create the .env file from the secret
+      - name: Create .env file
+        run: |
+          echo "${{ secrets.ENV_FILE }}" > .env
+        working-directory: ./app-react
+
       # Install dependencies and build
       - name: Install dependencies and build
         run: |
           npm install
           npm run build
-        working-directory: ./app-react # Specify the working directory for build
+        working-directory: ./app-react
 
       # Install Firebase CLI
       - name: Install Firebase CLI
@@ -35,6 +41,6 @@ jobs:
       - name: Deploy to Firebase Hosting
         run: |
           cd ./app-react # Change to the correct directory
-          firebase deploy --token ${{ secrets.FIREBASE_TOKEN }} # Use Firebase CLI directly
+          firebase deploy --token ${{ secrets.FIREBASE_TOKEN }}
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
